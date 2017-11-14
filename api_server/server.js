@@ -9,8 +9,8 @@ const masterRoutes = require('./routes/masterRoutes');
 
 
 const corsOptions = {
-    origin: ['http://localhost:4000'],
-    default: 'http://localhost:4000',
+    origin: ['http://localhost:4400'],
+    default: 'http://localhost:4400',
     credentials: true
   }
   

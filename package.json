@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "dev": "NODE_ENV=development node server.js && NODE_ENV=development ./api_server/nodemon server.js"
+    "dev": "NODE_ENV=development node server.js & nodemon ./api_server/server.js"
   },
   "repository": "https://github.com/pddigital/next-react-express-jwt-auth.git",
   "author": "Paul Day <paul.day.m@gmail.com>",
