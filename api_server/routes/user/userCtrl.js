@@ -16,6 +16,7 @@ const makeToken = () => {
 
 module.exports = {
   getUser(req, res, next) {
+    // this is querying the users JSON file, pretend it's a real DB for this step.
     const theUser = users.filter(oneUser => {
       return oneUser.user === req.body.user;
     });
@@ -23,10 +24,11 @@ module.exports = {
       res.theUser = theUser[0];
       next();
     } else {
-      return res.status(404).json("No user matches that email");
+      return res.status(404).json(false);
     }
   },
   checkPw(req, res, next) {
+    // its common to hash your password with bcrypt in a DB, but otherwise this is an optional step
     bcrypt
       .compare(req.body.password, res.theUser.password)
       .then(response => {
@@ -45,12 +47,15 @@ module.exports = {
     jwt
       .signAsync(
         { user: res.theUser.user, csrf: csrfToken },
-        "thepassphraseshhh"
+        'thepassphraseshhh', {expiresIn: '1hr'}
       )
       .then(token => {
           res.cookie('thejwt', token, {
             maxAge: 43200000,
             httpOnly: true
+            // FOR PRODUCTION:
+            // secure: true,
+            // domain: 'https://yourdomain.com'
           });
           
         return res.status(200).json({ user: res.theUser.user, csrf: csrfToken });
@@ -58,5 +63,38 @@ module.exports = {
       .catch(err => {
         return res.status(500).json(err);
       });
-  }
+  },
+  logout(req, res, next) {
+    // overwriting the JWT with a 1 second expiring cookie to logout
+    res.cookie(
+      'thejwt',
+      { loggedOut: true },
+      { maxAge: 1000, httpOnly: true }
+    );
+    return res.status(200).json({ loggedOut: true });
+  },
+  checkAuth(req, res, next) {
+    // both cookies and token has to exist to verify the auth
+    if(req.cookies['thejwt'] && req.headers['x-csrf-token']) {
+      jwt
+      .verifyAsync(req.cookies['thejwt'], 'thepassphraseshhh')
+      .then(data => {
+        if(data.csrf === req.headers['x-csrf-token']){
+          return res.status(200).json(data);                                    
+        }
+        else {
+          // returning 200 to not show an error in the console, fail silently...
+          return res.status(200).json(false);                
+        }
+      })
+      .catch(err => {
+          return res.status(200).json(false);              
+      });
+      
+    }
+    else {
+      return res.status(200).json(false);      
+    }
+  },
+
 };
