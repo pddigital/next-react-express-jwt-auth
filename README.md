@@ -5,6 +5,6 @@ To Install (with yarn, or use NPM):
 ```yarn install```
 
 To Run Both Servers:
-```yarn run dev``
+```yarn run dev```
 
 then navigate to http://localhost:4000 in your browser!
