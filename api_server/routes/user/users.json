@@ -1,0 +1,10 @@
+[
+    {
+        "user" : "testuser",
+        "password" : "$2a$10$2I3j.xv.IzsEEp7BIWytUOX700eHkwi4e7WCjM9DJiDoTLrk7pxbu"
+    },
+    {
+        "user" : "anothertestuser",
+        "password" : "$2a$10$2I3j.xv.IzsEEp7BIWytUOX700eHkwi4e7WCjM9DJiDoTLrk7pxbu"
+    }
+]
