@@ -4,7 +4,7 @@ Here's an example of using JWT to authenticate between two servers. The frontend
 To Install (with yarn, or use NPM):
 ```yarn install```
 
-To Run Both Servers:
+To run both servers:
 ```yarn run dev```
 
 Note that on Windows, you may need to run the API seperately as its a combined bash command.
