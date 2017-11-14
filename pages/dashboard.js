@@ -5,7 +5,7 @@ import { makeStore } from '../store';
 import { Link } from "../routes";
 import Layout from '../components/layout';
 
-class Index extends React.Component {
+class Dashboard extends React.Component {
 
   componentDidMount(){
 
@@ -17,7 +17,7 @@ class Index extends React.Component {
 
         <Layout>
             <section>
-            <h1>Hello from Node JS</h1>
+            <h1>Hello from Dashboard</h1>
 
             <Link to="/login"><a><button>LOGIN!</button></a></Link>
             </section>
@@ -36,4 +36,4 @@ const mapDispatchToProps = dispatch => ({
   toggleAuth: bindActionCreators(toggleAuth, dispatch),  
 });
 
-export default withRedux(makeStore, mapStateToProps, mapDispatchToProps)(Index);
+export default withRedux(makeStore, mapStateToProps, mapDispatchToProps)(Dashboard);
