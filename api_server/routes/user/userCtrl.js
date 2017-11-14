@@ -3,6 +3,8 @@ const Promise = require("bluebird");
 const bcrypt = Promise.promisifyAll(require("bcrypt"));
 const jwt = Promise.promisifyAll(require("jsonwebtoken"));
 
+
+// this is a simple token generator, good enough for csrf...
 const makeToken = () => {
   let text = "";
   let possible =
@@ -74,7 +76,7 @@ module.exports = {
     return res.status(200).json({ loggedOut: true });
   },
   checkAuth(req, res, next) {
-    // both cookies and token has to exist to verify the auth
+    // both the jwt cookie and csrf token has to exist to verify the auth
     if(req.cookies['thejwt'] && req.headers['x-csrf-token']) {
       jwt
       .verifyAsync(req.cookies['thejwt'], 'thepassphraseshhh')
