@@ -4,7 +4,7 @@ const bcrypt = Promise.promisifyAll(require("bcrypt"));
 const jwt = Promise.promisifyAll(require("jsonwebtoken"));
 
 
-// this is a simple token generator, good enough for csrf...
+// this is a simple token generator, good enough for csrf...gt
 const makeToken = () => {
   let text = "";
   let possible =
@@ -98,5 +98,34 @@ module.exports = {
       return res.status(200).json(false);      
     }
   },
-
+  authGuard(req, res, next) {
+    // both the jwt cookie and csrf token has to exist to verify the auth
+    if(req.cookies['thejwt'] && req.headers['x-csrf-token']) {
+      jwt
+      .verifyAsync(req.cookies['thejwt'], 'thepassphraseshhh')
+      .then(data => {
+        if(data.csrf === req.headers['x-csrf-token']){
+          // can proceed if authed
+          next()                                 
+        }
+        else {
+          return res.status(443).json(false);                
+        }
+      })
+      .catch(err => {
+          return res.status(443).json(false);              
+      });
+      
+    }
+    else {
+      return res.status(443).json(false);      
+    }
+  },
+  protectedStuff(req, res, next){
+    const data = {
+      stuff: 'This is protected content. You have been authenticated!'
+    }
+    return res.status(200).json(data);                
+    
+  }
 };

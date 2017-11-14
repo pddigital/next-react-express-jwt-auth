@@ -20,6 +20,7 @@ export default ({children})=> (
 
             body {
                 font-family: Verdana;
+                font-size: 18px;
             }
 
             h1 {
@@ -40,7 +41,7 @@ export default ({children})=> (
                 
             }
 
-            input[type="email"] {
+            input[type="text"] {
                 width: 100%;
                 padding: 10px;
                 margin-bottom: 10px;
