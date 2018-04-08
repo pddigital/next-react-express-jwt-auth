@@ -2,7 +2,7 @@
 Here's an example of using JWT to authenticate between two servers. The frontend is using React and Next.js. Routing is handled by Next Routes. State is handled by Redux and the Next Redux Wrapper. The backend is using Express - and is providing a mock user DB via a JSON file.
 
 To Install (with yarn, or use NPM):
-```yarn add cross-env -g``` <- for Windows compatibility
+```yarn add cross-env -g``` <- for Windows compatibility, then
 ```yarn install```
 
 To run API server:
