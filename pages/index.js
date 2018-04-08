@@ -6,12 +6,13 @@ import { Link } from "../routes";
 import Layout from "../components/layout";
 import AuthCheckerSoft from "../components/authCheckerSoft";
 import { logoutUser } from "../lib/account";
+import 'isomorphic-fetch';
 
 class Index extends React.Component {
-  static async getInitialProps({ store, isServer, pathname, query }) {
-    return {};
+  static async getInitialProps({ req, query }) {
+    return {
+    };
   }
-
   logout() {
     logoutUser().then(response => {
       this.props.toggleAuth(false);
@@ -39,6 +40,12 @@ class Index extends React.Component {
           </Link>
           </span>
            }
+
+            <p>
+              <Link to="/content">
+                <a>Try Unprotected Content</a>
+              </Link>
+            </p>
         </section>
       </Layout>
     );

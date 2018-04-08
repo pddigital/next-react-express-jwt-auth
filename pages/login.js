@@ -8,8 +8,9 @@ import AuthCheckerSoft from "../components/authCheckerSoft";
 import { loginUser } from "../lib/account";
 
 class Login extends React.Component {
-  static async getInitialProps({ store, isServer, pathname, query }) {
-    return {};
+    static async getInitialProps({ req, query }) {
+    return {
+    };
   }
   constructor(props) {
     super(props);
@@ -90,6 +91,8 @@ class Login extends React.Component {
                 <a>Try Protected Route</a>
               </Link>
             </p>
+
+           
           </form>
         </section>
         <style jsx>

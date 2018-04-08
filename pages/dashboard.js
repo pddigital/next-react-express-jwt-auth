@@ -8,8 +8,9 @@ import { getProtectedContent } from "../lib/account";
 import AuthChecker from "../components/authChecker";
 
 class Dashboard extends React.Component {
-  static async getInitialProps({ store, isServer, pathname, query }) {
-    return {};
+  static async getInitialProps({ req, query }) {
+    return {
+    };
   }
   constructor(props) {
     super(props);
