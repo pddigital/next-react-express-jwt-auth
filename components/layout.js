@@ -1,11 +1,14 @@
-import Layout from '../components/layout';
+import Layout from "../components/layout";
+import Head from "next/head";
 
-export default ({children})=> (
-    <div>
-        {children}
-        <style jsx global>
-        {
-            `
+export default ({ children, title }) => (
+  <div>
+    <Head>
+      <title>{title}</title>
+    </Head>
+    {children}
+    <style jsx global>
+      {`
             html {
                 -webkit-box-sizing: border-box;
                 -moz-box-sizing: border-box;
@@ -67,9 +70,14 @@ export default ({children})=> (
             button:hover {
                 cursor: pointer;
             }
+
+            .container {
+                width: 100%;
+                max-width: 1200px;
+                margin: auto;
+            }
             
-            `
-        }
-        </style>
-    </div>
-)
+            `}
+    </style>
+  </div>
+);

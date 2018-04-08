@@ -12,9 +12,11 @@ export default function AuthCheckerSoft(Child) {
     }
 
     componentDidMount() {
-      checkAuth()
+      const user = JSON.parse(localStorage.getItem("user"));
+      checkAuth(user)
         .then(response => {
           if (response) {
+            localStorage.setItem("user", JSON.stringify(response));
             this.props.toggleAuth(true);
           } else {
             this.props.toggleAuth(false);

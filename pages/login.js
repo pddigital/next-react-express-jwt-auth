@@ -8,9 +8,8 @@ import AuthCheckerSoft from "../components/authCheckerSoft";
 import { loginUser } from "../lib/account";
 
 class Login extends React.Component {
-    static async getInitialProps({ req, query }) {
-    return {
-    };
+  static async getInitialProps({ req, query }) {
+    return {};
   }
   constructor(props) {
     super(props);
@@ -20,10 +19,13 @@ class Login extends React.Component {
       password: "",
       error: ""
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.login = this.login.bind(this)
   }
 
-  handleChange(field, event) {
-    this.setState({ [field]: event.target.value });
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   login(event) {
@@ -52,23 +54,25 @@ class Login extends React.Component {
 
   render() {
     return (
-      <Layout>
+      <Layout title="Login to the Dashboard!">
         <section>
           <h1>Login now!</h1>
           <p>Hint: testuser, password12</p>
-          <form onSubmit={this.login.bind(this)}>
+          <form onSubmit={this.login}>
             <label htmlFor="user">User: </label>
             <input
               type="text"
               name="user"
-              onChange={this.handleChange.bind(this, "user")}
+              value={this.state.user}
+              onChange={this.handleChange}
               required
             />
             <label htmlFor="password">Password: </label>
             <input
               type="password"
               name="password"
-              onChange={this.handleChange.bind(this, "password")}
+              value={this.state.password}
+              onChange={this.handleChange}              
               required
             />
             <button type="submit" id="submit">
@@ -91,8 +95,6 @@ class Login extends React.Component {
                 <a>Try Protected Route</a>
               </Link>
             </p>
-
-           
           </form>
         </section>
         <style jsx>
@@ -107,6 +109,10 @@ class Login extends React.Component {
               display: block;
               text-align: center;
               border-radius: 2px 2px;
+            }
+
+            button {
+              margin-top: 20px;
             }
           `}
         </style>

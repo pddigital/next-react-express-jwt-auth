@@ -1,4 +1,4 @@
-import DashRedirect from './dashRedirect';
+import DashRedirect from "./dashRedirect";
 import { checkAuth } from "../lib/account";
 
 export default function AuthChecker(Child) {
@@ -11,13 +11,12 @@ export default function AuthChecker(Child) {
       super(props);
     }
 
-    componentWillMount() {
-      
-        console.log(this.props)
-
-      checkAuth()
+    componentDidMount() {
+      const user = JSON.parse(localStorage.getItem("user"));
+      checkAuth(user)
         .then(response => {
           if (response) {
+            localStorage.setItem("user", JSON.stringify(response));
             this.props.toggleAuth(true);
           } else {
             this.props.toggleAuth(false);
@@ -32,7 +31,7 @@ export default function AuthChecker(Child) {
       if (this.props.authed) {
         return <Child {...this.props} />;
       } else {
-        return <DashRedirect />
+        return <DashRedirect />;
       }
     }
   };

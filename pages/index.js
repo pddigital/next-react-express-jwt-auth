@@ -6,13 +6,21 @@ import { Link } from "../routes";
 import Layout from "../components/layout";
 import AuthCheckerSoft from "../components/authCheckerSoft";
 import { logoutUser } from "../lib/account";
-import 'isomorphic-fetch';
+import "isomorphic-fetch";
 
 class Index extends React.Component {
   static async getInitialProps({ req, query }) {
-    return {
-    };
+    return {};
   }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+
+    this.logout = this.logout.bind(this);
+  }
+
   logout() {
     logoutUser().then(response => {
       this.props.toggleAuth(false);
@@ -21,31 +29,31 @@ class Index extends React.Component {
 
   render() {
     return (
-      <Layout>
+      <Layout title="Welcome to the Homepage">
         <section>
           <h1>Hello from Node JS</h1>
 
-          {this.props.authed ? 
+          {this.props.authed ? (
             <span>
-                <p>You are logged in. Try logging out!</p>
-            <button onClick={this.logout.bind(this)}>LOGOUT</button>
+              <p>You are logged in. Try logging out!</p>
+              <button onClick={this.logout}>LOGOUT</button>
             </span>
-            :
+          ) : (
             <span>
-            <p>You are not logged in. Go forward and auth!</p>
-            <Link to="/login">
-            <a>
-              <button>LOGIN!</button>
-            </a>
-          </Link>
-          </span>
-           }
-
-            <p>
-              <Link to="/content">
-                <a>Try Unprotected Content</a>
+              <p>You are not logged in. Go forward and auth!</p>
+              <Link to="/login">
+                <a>
+                  <button>LOGIN!</button>
+                </a>
               </Link>
-            </p>
+            </span>
+          )}
+
+          <p>
+            <Link to="/content">
+              <a>Try Unprotected Content</a>
+            </Link>
+          </p>
         </section>
       </Layout>
     );

@@ -31,19 +31,17 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <Layout>
+      <Layout title="Welcome to the Dashboard!">
         <section>
           <h1>Hello from Dashboard</h1>
 
           <p>{this.state.content}</p>
 
-          <center>
             <p>
               <Link to="/">
                 <a>Back Home</a>
               </Link>
             </p>
-          </center>
         </section>
       </Layout>
     );
