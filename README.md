@@ -9,6 +9,6 @@ To run API server:
 ```yarn run server-dev```
 
 To run Next server/client:
-```yarn run client-dev```
+```yarn run dev```
 
 Run both, then navigate to http://localhost:4400 in your browser!
