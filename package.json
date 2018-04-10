@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "client-dev": "cross-env NODE_ENV=development node server.js",
+    "dev": "cross-env NODE_ENV=development node server.js",
     "server-dev": "cross-env nodemon ./api_server/server.js",
     "client-prod": "cross-env NODE_ENV=production node server.js",
     "server-prod": "cross-env NODE_ENV=production ./api_server/server.js",
